@@ -2093,4 +2093,4 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
-        st.rerun()
+st.rerun()
