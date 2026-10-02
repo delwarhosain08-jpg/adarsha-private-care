@@ -247,9 +247,9 @@ def delete_row(table_name, match_column, match_value):
 st.markdown(
     """
     <style>
-    /* অ্যাপের মূল ব্যাকগ্রাউন্ড কালার লাল করার জন্য */
+    /* অ্যাপের মূল ব্যাকগ্রাউন্ড এবং লেখার ডিফল্ট রঙ */
     .stApp {
-        background: #8b0000 !important; /* একটি আকর্ষণীয় গাঢ় লাল (Dark Red) রঙ */
+        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 45%, #0f172a 100%) !important;
         color: #ffffff !important;
     }
     
@@ -257,32 +257,25 @@ st.markdown(
         padding-top: 1rem;
     }
     
-    /* সাইডবারের ব্যাকগ্রাউন্ড */
+    /* সাইডবারের ডিজাইন */
     section[data-testid="stSidebar"] {
-        background: #500000 !important;
+        background: linear-gradient(180deg, #090d16 0%, #1e1b4b 100%) !important;
     }
     section[data-testid="stSidebar"] * {
         color: #ffffff !important;
     }
     
-    /* হেডিং ও টেক্সটের কালার সাদা */
-    h1, h2, h3, h4, h5, h6, p, span, label {
-        color: #ffffff !important;
-    }
-    
-    /* কার্ড বা বক্সগুলোর ব্যাকগ্রাউন্ড */
-    .card, .feature, .contact-card, .notice, .info-box, .stat-card {
-        background: #a52a2a !important;
-        border: 1px solid #ff4d4d !important;
+    /* সকল হেডিং ও টেক্সট স্পষ্ট সাদা করার জন্য */
+    h1, h2, h3, h4, h5, h6, p, span, label, div {
         color: #ffffff !important;
     }
     
     .hero {
-        background: linear-gradient(135deg, #4a0000, #8b0000, #ff1a1a);
+        background: linear-gradient(135deg, #4f46e5, #7c3aed, #db2777);
         padding: 42px 25px;
         border-radius: 28px;
         color: white;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        box-shadow: 0 15px 40px rgba(79,70,229,0.30);
         margin-bottom: 25px;
         text-align: center;
     }
@@ -293,41 +286,117 @@ st.markdown(
         margin-bottom: 10px;
     }
     .hero-subtitle {
-        color: #ffe6e6 !important;
+        color: #f5f3ff !important;
         font-size: 20px;
         margin: 8px 0;
     }
     .hero-description {
-        color: #ffcccc !important;
+        color: #ede9fe !important;
         font-size: 15px;
         margin-top: 15px;
     }
     
+    /* কার্ড বা বক্সগুলোর ব্যাকগ্রাউন্ড ডার্ক ও গ্লাস ইফেক্ট */
+    .card {
+        background: rgba(15, 23, 42, 0.85) !important;
+        padding: 25px;
+        border-radius: 22px;
+        box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+        border: 1px solid rgba(129, 140, 248, 0.3);
+        margin-bottom: 20px;
+        color: #ffffff !important;
+    }
+    .feature {
+        background: rgba(30, 27, 75, 0.9) !important;
+        padding: 25px;
+        min-height: 190px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 7px 25px rgba(0,0,0,0.3);
+        border: 1px solid rgba(129, 140, 248, 0.2);
+        margin-bottom: 20px;
+        color: #ffffff !important;
+    }
+    .feature-icon {
+        font-size: 45px;
+        margin-bottom: 10px;
+    }
+    .contact-card {
+        background: linear-gradient(135deg, #1e1b4b, #312e81) !important;
+        padding: 22px;
+        min-height: 150px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 7px 22px rgba(0,0,0,0.3);
+        color: #ffffff !important;
+    }
+    .contact-icon {
+        font-size: 35px;
+    }
+    .social-button {
+        display: block;
+        text-align: center;
+        padding: 14px;
+        margin: 8px 0;
+        border-radius: 12px;
+        background: linear-gradient(90deg, #4f46e5, #7c3aed);
+        color: white !important;
+        text-decoration: none;
+        font-weight: 700;
+    }
+    .social-button:hover {
+        opacity: 0.88;
+    }
+    .notice {
+        background: rgba(30, 27, 75, 0.95) !important;
+        border-left: 6px solid #818cf8;
+        padding: 20px;
+        border-radius: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 5px 18px rgba(0,0,0,0.3);
+        color: #ffffff !important;
+    }
+    .info-box {
+        background: linear-gradient(135deg, #1e1b4b, #312e81) !important;
+        padding: 20px;
+        border-radius: 18px;
+        border: 1px solid #818cf8;
+        margin-bottom: 20px;
+        color: #ffffff !important;
+    }
+    .stat-card {
+        background: rgba(15, 23, 42, 0.85) !important;
+        padding: 22px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 7px 25px rgba(0,0,0,0.3);
+        border: 1px solid rgba(129, 140, 248, 0.2);
+        color: #ffffff !important;
+    }
     .stat-number {
         font-size: 32px;
         font-weight: 800;
-        color: #ff9999 !important;
+        color: #818cf8 !important;
     }
     .stat-label {
-        color: #ffcccc !important;
+        color: #cbd5e1 !important;
         font-size: 14px;
     }
     
-    /* ইনপুট বক্স বা লেখার ঘরের রঙ */
+    /* ইনপুট ফিল্ডগুলো পরিষ্কার দেখার জন্য */
     input, textarea, select {
-        background-color: #660000 !important;
+        background-color: #0f172a !important;
         color: #ffffff !important;
-        border: 1px solid #ff4d4d !important;
+        border: 1px solid #818cf8 !important;
     }
     
     .footer {
         text-align: center;
         padding: 35px 20px;
-        color: #ffcccc !important;
+        color: #94a3b8 !important;
         font-size: 14px;
         margin-top: 30px;
     }
-    
     @media (max-width: 768px) {
         .hero-title { font-size: 30px; }
         .hero-subtitle { font-size: 16px; }
