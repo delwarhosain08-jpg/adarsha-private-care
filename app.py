@@ -34,10 +34,11 @@ st.set_page_config(
 # PROJECT PATH
 # ============================================================
 
+from pathlib import Path
+
 BASE_DIR = Path(__file__).resolve().parent
-ASSETS_DIR = BASE_DIR / "assets"
-LOGO_PATH = "logo.png"
-BANNER_PATH = "banner.jpg"
+LOGO_PATH = BASE_DIR / "logo.png"
+BANNER_PATH = BASE_DIR / "banner.jpg""
 
 
 # ============================================================
