@@ -36,8 +36,8 @@ st.set_page_config(
 
 BASE_DIR = Path(__file__).resolve().parent
 ASSETS_DIR = BASE_DIR / "assets"
-LOGO_PATH = ASSETS_DIR / "logo.png"
-BANNER_PATH = ASSETS_DIR / "banner.jpg"
+LOGO_PATH = "logo.png"
+BANNER_PATH = "banner.jpg"
 
 
 # ============================================================
