@@ -38,7 +38,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 LOGO_PATH = BASE_DIR / "logo.png"
-BANNER_PATH = BASE_DIR / "banner.jpg""
+BANNER_PATH = BASE_DIR / "banner.jpg"
 
 
 # ============================================================
