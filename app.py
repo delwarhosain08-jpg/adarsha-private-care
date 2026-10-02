@@ -1,3 +1,11 @@
+import streamlit as st
+
+st.set_page_config(
+    page_title="আদর্শ প্রাইভেট কেয়ার",
+    page_icon="🎓",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 # ============================================================
 # আদর্শ প্রাইভেট কেয়ার
 # Professional Coaching Management System
