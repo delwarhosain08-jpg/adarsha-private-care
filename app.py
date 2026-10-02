@@ -244,141 +244,89 @@ def delete_row(table_name, match_column, match_value):
         return False, str(error)
 
 
-# ============================================================
-# CUSTOM CSS
-# ============================================================
-
 st.markdown(
     """
     <style>
+    /* অ্যাপের মূল ব্যাকগ্রাউন্ড কালার কালো করার জন্য */
     .stApp {
-        background: linear-gradient(135deg, #eef2ff 0%, #fdf2f8 45%, #ecfeff 100%);
+        background: #0e1117 !important;
+        color: #ffffff !important;
     }
+    
     .main {
         padding-top: 1rem;
     }
+    
+    /* সাইডবারের ব্যাকগ্রাউন্ড */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #312e81 0%, #4f46e5 50%, #7c3aed 100%);
+        background: #161b22 !important;
     }
     section[data-testid="stSidebar"] * {
-        color: white !important;
+        color: #ffffff !important;
     }
-    h1, h2 {
-        font-weight: 800 !important;
+    
+    /* হেডিং ও টেক্সটের কালার সাদা */
+    h1, h2, h3, h4, h5, h6, p, span, label {
+        color: #ffffff !important;
     }
-    h3 {
-        font-weight: 700 !important;
+    
+    /* কার্ড বা বক্সগুলোর ব্যাকগ্রাউন্ড ডার্ক করার জন্য */
+    .card, .feature, .contact-card, .notice, .info-box, .stat-card {
+        background: #1f2937 !important;
+        border: 1px solid #374151 !important;
+        color: #ffffff !important;
     }
+    
     .hero {
-        background: linear-gradient(135deg, #4f46e5, #7c3aed, #db2777);
+        background: linear-gradient(135deg, #1e1b4b, #312e81, #581c87);
         padding: 42px 25px;
         border-radius: 28px;
         color: white;
-        box-shadow: 0 15px 40px rgba(79,70,229,0.30);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.5);
         margin-bottom: 25px;
         text-align: center;
     }
     .hero-title {
-        color: white;
+        color: white !important;
         font-size: 42px;
         font-weight: 800;
         margin-bottom: 10px;
     }
     .hero-subtitle {
-        color: #f5f3ff;
+        color: #e2e8f0 !important;
         font-size: 20px;
         margin: 8px 0;
     }
     .hero-description {
-        color: #ede9fe;
+        color: #cbd5e1 !important;
         font-size: 15px;
         margin-top: 15px;
     }
-    .card {
-        background: rgba(255, 255, 255, 0.97);
-        padding: 25px;
-        border-radius: 22px;
-        box-shadow: 0 8px 28px rgba(0,0,0,0.08);
-        border: 1px solid rgba(99,102,241,0.12);
-        margin-bottom: 20px;
-    }
-    .feature {
-        background: white;
-        padding: 25px;
-        min-height: 190px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 7px 25px rgba(0,0,0,0.08);
-        margin-bottom: 20px;
-    }
-    .feature-icon {
-        font-size: 45px;
-        margin-bottom: 10px;
-    }
-    .contact-card {
-        background: linear-gradient(135deg, #ffffff, #f5f3ff);
-        padding: 22px;
-        min-height: 150px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 7px 22px rgba(0,0,0,0.07);
-    }
-    .contact-icon {
-        font-size: 35px;
-    }
-    .social-button {
-        display: block;
-        text-align: center;
-        padding: 14px;
-        margin: 8px 0;
-        border-radius: 12px;
-        background: linear-gradient(90deg, #4f46e5, #7c3aed);
-        color: white !important;
-        text-decoration: none;
-        font-weight: 700;
-    }
-    .social-button:hover {
-        opacity: 0.88;
-    }
-    .notice {
-        background: white;
-        border-left: 6px solid #4f46e5;
-        padding: 20px;
-        border-radius: 15px;
-        margin-bottom: 15px;
-        box-shadow: 0 5px 18px rgba(0,0,0,0.06);
-    }
-    .info-box {
-        background: linear-gradient(135deg, #eef2ff, #f5f3ff);
-        padding: 20px;
-        border-radius: 18px;
-        border: 1px solid #ddd6fe;
-        margin-bottom: 20px;
-    }
-    .stat-card {
-        background: white;
-        padding: 22px;
-        border-radius: 20px;
-        text-align: center;
-        box-shadow: 0 7px 25px rgba(0,0,0,0.08);
-        border: 1px solid #e5e7eb;
-    }
+    
     .stat-number {
         font-size: 32px;
         font-weight: 800;
-        color: #4f46e5;
+        color: #818cf8 !important;
     }
     .stat-label {
-        color: #6b7280;
+        color: #9ca3af !important;
         font-size: 14px;
     }
+    
+    /* ইনপুট বক্স বা লেখার ঘরের রঙ */
+    input, textarea, select {
+        background-color: #374151 !important;
+        color: #ffffff !important;
+    }
+    
     .footer {
         text-align: center;
         padding: 35px 20px;
-        color: #6b7280;
+        color: #9ca3af !important;
         font-size: 14px;
         margin-top: 30px;
     }
+    
     @media (max-width: 768px) {
         .hero-title { font-size: 30px; }
         .hero-subtitle { font-size: 16px; }
@@ -388,7 +336,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 
 # ============================================================
 # SIDEBAR
@@ -2079,18 +2026,5 @@ if "ai_chat_history" in st.session_state and st.session_state.ai_chat_history:
     ):
 
         st.session_state.ai_chat_history = []
-st.markdown("""
-    <style>
-    /* অ্যাপের মূল ব্যাকগ্রাউন্ড এবং লেখার কালার ঠিক করার জন্য */
-    .stApp {
-        background-color: #0e1117; /* একটি সুন্দর গাঢ় (Dark) ব্যাকগ্রাউন্ড */
-        color: #ffffff; /* লেখাগুলো সাদা করার জন্য */
-    }
-    
-    /* ইনপুট বক্স বা লেখার ঘরের রঙ স্পষ্ট করার জন্য */
-    input, textarea, select {
-        color: #000000 !important;
-    }
-    </style>
-""", unsafe_allow_html=True)
+
 st.rerun()
