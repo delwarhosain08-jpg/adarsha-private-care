@@ -247,9 +247,9 @@ def delete_row(table_name, match_column, match_value):
 st.markdown(
     """
     <style>
-    /* অ্যাপের মূল ব্যাকগ্রাউন্ড কালার কালো করার জন্য */
+    /* অ্যাপের মূল ব্যাকগ্রাউন্ড কালার লাল করার জন্য */
     .stApp {
-        background: #0e1117 !important;
+        background: #8b0000 !important; /* একটি আকর্ষণীয় গাঢ় লাল (Dark Red) রঙ */
         color: #ffffff !important;
     }
     
@@ -259,7 +259,7 @@ st.markdown(
     
     /* সাইডবারের ব্যাকগ্রাউন্ড */
     section[data-testid="stSidebar"] {
-        background: #161b22 !important;
+        background: #500000 !important;
     }
     section[data-testid="stSidebar"] * {
         color: #ffffff !important;
@@ -270,15 +270,15 @@ st.markdown(
         color: #ffffff !important;
     }
     
-    /* কার্ড বা বক্সগুলোর ব্যাকগ্রাউন্ড ডার্ক করার জন্য */
+    /* কার্ড বা বক্সগুলোর ব্যাকগ্রাউন্ড */
     .card, .feature, .contact-card, .notice, .info-box, .stat-card {
-        background: #1f2937 !important;
-        border: 1px solid #374151 !important;
+        background: #a52a2a !important;
+        border: 1px solid #ff4d4d !important;
         color: #ffffff !important;
     }
     
     .hero {
-        background: linear-gradient(135deg, #1e1b4b, #312e81, #581c87);
+        background: linear-gradient(135deg, #4a0000, #8b0000, #ff1a1a);
         padding: 42px 25px;
         border-radius: 28px;
         color: white;
@@ -293,12 +293,12 @@ st.markdown(
         margin-bottom: 10px;
     }
     .hero-subtitle {
-        color: #e2e8f0 !important;
+        color: #ffe6e6 !important;
         font-size: 20px;
         margin: 8px 0;
     }
     .hero-description {
-        color: #cbd5e1 !important;
+        color: #ffcccc !important;
         font-size: 15px;
         margin-top: 15px;
     }
@@ -306,23 +306,24 @@ st.markdown(
     .stat-number {
         font-size: 32px;
         font-weight: 800;
-        color: #818cf8 !important;
+        color: #ff9999 !important;
     }
     .stat-label {
-        color: #9ca3af !important;
+        color: #ffcccc !important;
         font-size: 14px;
     }
     
     /* ইনপুট বক্স বা লেখার ঘরের রঙ */
     input, textarea, select {
-        background-color: #374151 !important;
+        background-color: #660000 !important;
         color: #ffffff !important;
+        border: 1px solid #ff4d4d !important;
     }
     
     .footer {
         text-align: center;
         padding: 35px 20px;
-        color: #9ca3af !important;
+        color: #ffcccc !important;
         font-size: 14px;
         margin-top: 30px;
     }
@@ -336,7 +337,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 # ============================================================
 # SIDEBAR
 # ============================================================
