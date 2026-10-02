@@ -440,7 +440,7 @@ with st.sidebar:
         """,
         unsafe_allow_html=True
     )
-elif menu == "👨‍🏫 শিক্ষক":
+    elif menu == "শিক্ষক":
     st.markdown("## 👨‍🏫 শিক্ষক পরিচিতি")
     
     # গিটহাবে আপলোড করা আপনার ছবি দেখানোর কোড
