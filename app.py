@@ -2079,5 +2079,18 @@ if "ai_chat_history" in st.session_state and st.session_state.ai_chat_history:
     ):
 
         st.session_state.ai_chat_history = []
-
+st.markdown("""
+    <style>
+    /* অ্যাপের মূল ব্যাকগ্রাউন্ড এবং লেখার কালার ঠিক করার জন্য */
+    .stApp {
+        background-color: #0e1117; /* একটি সুন্দর গাঢ় (Dark) ব্যাকগ্রাউন্ড */
+        color: #ffffff; /* লেখাগুলো সাদা করার জন্য */
+    }
+    
+    /* ইনপুট বক্স বা লেখার ঘরের রঙ স্পষ্ট করার জন্য */
+    input, textarea, select {
+        color: #000000 !important;
+    }
+    </style>
+""", unsafe_allow_html=True)
         st.rerun()
