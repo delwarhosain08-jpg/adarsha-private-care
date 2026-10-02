@@ -583,396 +583,211 @@ elif menu == "📢 নোটিশ":
     else:
         st.info("এই মুহূর্তে কোনো নতুন নোটিশ নেই।")
 
-# =========================================================
-# 💬 ছাত্র-ছাত্রী ও শিক্ষক চ্যাট
-# =========================================================
-
 elif menu == "💬 ছাত্র-ছাত্রী চ্যাট":
 
     st.markdown("## 💬 চ্যাট কর্নার")
     st.caption("👨‍🎓 শিক্ষার্থী • 👨‍🏫 শিক্ষক • 👥 বন্ধু")
 
+    # Custom CSS for Modern Chat UI
+    st.markdown("""
+        <style>
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+        }
+        .chat-bubble-sent {
+            background: linear-gradient(135deg, #0084ff 0%, #00c6ff 100%);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 18px 18px 4px 18px;
+            margin: 4px 0 4px 25%;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+        .chat-bubble-received {
+            background: #f0f2f5;
+            color: #1c1e21;
+            padding: 12px 16px;
+            border-radius: 18px 18px 18px 4px;
+            margin: 4px 25% 4px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            word-wrap: break-word;
+        }
+        .chat-meta-sent {
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: right;
+            margin-top: 4px;
+        }
+        .chat-meta-received {
+            font-size: 10px;
+            color: #65676b;
+            text-align: left;
+            margin-top: 4px;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     # =====================================================
-    # USER INFORMATION
+    # USER INFORMATION & RECIPIENT SELECTION
     # =====================================================
+    
+    col1, col2 = st.columns(2)
+    with col1:
+        sender_name = st.text_input(
+            "👤 আপনার নাম",
+            placeholder="যেমন: আব্দুল্লাহ",
+            key="chat_sender_name"
+        )
+        sender_role = st.selectbox(
+            "আপনার ভূমিকা",
+            ["student", "teacher"],
+            format_func=lambda x: "👨‍🎓 শিক্ষার্থী" if x == "student" else "👨‍🏫 শিক্ষক",
+            key="chat_sender_role"
+        )
 
-    st.markdown("### 👤 আপনার তথ্য")
+    with col2:
+        recipient_type = st.radio(
+            "🎯 প্রাপকের ধরন",
+            ["👨‍🏫 শিক্ষক", "👥 বন্ধু"],
+            horizontal=True,
+            key="chat_recipient_type"
+        )
+        if recipient_type == "👨‍🏫 শিক্ষক":
+            recipient_role = "teacher"
+            recipient_name = st.text_input(
+                "শিক্ষকের নাম",
+                placeholder="যেমন: করিম স্যার",
+                key="chat_teacher_name"
+            ).strip()
+        else:
+            recipient_role = "student"
+            recipient_name = st.text_input(
+                "বন্ধুর নাম",
+                placeholder="যেমন: রাকিব",
+                key="chat_friend_name"
+            ).strip()
 
-    sender_name = st.text_input(
-        "আপনার নাম",
-        placeholder="যেমন: আব্দুল্লাহ",
-        key="chat_sender_name"
-    )
-
-    sender_role = st.selectbox(
-        "আপনি কে?",
-        ["student", "teacher"],
-        format_func=lambda x:
-            "👨‍🎓 শিক্ষার্থী"
-            if x == "student"
-            else "👨‍🏫 শিক্ষক",
-        key="chat_sender_role"
-    )
-
-    # =====================================================
-    # RECIPIENT
-    # =====================================================
-
-    st.markdown("---")
-    st.markdown("### 🎯 কার কাছে বার্তা পাঠাবেন?")
-
-    recipient_type = st.radio(
-        "প্রাপক নির্বাচন করুন",
-        ["👨‍🏫 শিক্ষক", "👥 বন্ধু"],
-        horizontal=True,
-        key="chat_recipient_type"
-    )
-
-    if recipient_type == "👨‍🏫 শিক্ষক":
-
-        recipient_role = "teacher"
-
-        recipient_name = st.text_input(
-            "👨‍🏫 শিক্ষকের নাম",
-            placeholder="যেমন: করিম স্যার",
-            key="chat_teacher_name"
-        ).strip()
-
-    else:
-
-        recipient_role = "student"
-
-        recipient_name = st.text_input(
-            "👥 বন্ধুর নাম",
-            placeholder="যেমন: রাকিব",
-            key="chat_friend_name"
-        ).strip()
+    sender_clean = sender_name.strip()
+    recipient_clean = recipient_name.strip()
 
     # =====================================================
     # CONVERSATION ID
     # =====================================================
-
-    sender_clean = sender_name.strip()
-
-    if sender_clean and recipient_name:
-
+    if sender_clean and recipient_clean:
         users = sorted([
-            sender_clean.lower(),
-            recipient_name.lower()
+            sender_clean.lower().replace(" ", ""),
+            recipient_clean.lower().replace(" ", "")
         ])
-
-        conversation_id = (
-            "chat_"
-            + "_".join(
-                x.replace(" ", "_")
-                for x in users
-            )
-        )
-
+        conversation_id = f"chat_{users[0]}_{users[1]}"
     else:
-
         conversation_id = None
 
-    # =====================================================
-    # CHAT HEADER
-    # =====================================================
-
-    if sender_clean and recipient_name:
-
-        st.info(
-            f"💬 {sender_clean}  →  {recipient_name}"
-        )
-
-    # =====================================================
-    # MESSAGE INPUT
-    # =====================================================
-
     st.markdown("---")
 
-    msg = st.text_area(
-        "✍️ আপনার বার্তা",
-        placeholder="এখানে আপনার বার্তা লিখুন...",
-        height=120,
-        key="chat_message"
-    )
-
     # =====================================================
-    # SEND MESSAGE
+    # CHAT HISTORY & DISPLAY
     # =====================================================
-
-    if st.button(
-        "📤 বার্তা পাঠান",
-        use_container_width=True,
-        key="send_chat_message"
-    ):
-
-        if not sender_clean:
-
-            st.warning(
-                "⚠️ আপনার নাম লিখুন।"
-            )
-
-        elif not recipient_name:
-
-            st.warning(
-                "⚠️ যার কাছে বার্তা পাঠাবেন "
-                "তার নাম লিখুন।"
-            )
-
-        elif not msg.strip():
-
-            st.warning(
-                "⚠️ বার্তা লিখুন।"
-            )
-
-        elif not conversation_id:
-
-            st.error(
-                "❌ Conversation তৈরি করা যায়নি।"
-            )
-
-        else:
-
-            message_data = {
-
-                "conversation_id": conversation_id,
-
-                "student_name":
-                    sender_clean
-                    if sender_role == "student"
-                    else recipient_name,
-
-                "sender_name":
-                    sender_clean,
-
-                "sender_role":
-                    sender_role,
-
-                "recipient_name":
-                    recipient_name,
-
-                "recipient_role":
-                    recipient_role,
-
-                "message":
-                    msg.strip()
-            }
-
-            try:
-
-                success, data, err = insert_row(
-                    "messages",
-                    message_data
-                )
-
-                if success:
-
-                    st.success(
-                        f"✅ {recipient_name}-এর কাছে "
-                        "বার্তা পাঠানো হয়েছে।"
-                    )
-
-                    st.rerun()
-
-                else:
-
-                    st.error(
-                        f"❌ বার্তা পাঠাতে সমস্যা হয়েছে: {err}"
-                    )
-
-            except Exception as e:
-
-                st.error(
-                    f"❌ বার্তা পাঠাতে সমস্যা হয়েছে: {e}"
-                )
-
-    # =====================================================
-    # CHAT HISTORY
-    # =====================================================
-
-    st.markdown("---")
-    st.markdown("### 💬 কথোপকথন")
-
-    if not sender_clean:
-
-        st.info(
-            "👤 প্রথমে আপনার নাম লিখুন।"
-        )
-
-    elif not recipient_name:
-
-        st.info(
-            "🎯 যার সাথে কথা বলতে চান "
-            "তার নাম লিখুন।"
-        )
-
+    if not sender_clean or not recipient_clean:
+        st.info("ℹ️ চ্যাট দেখতে প্রথমে ওপরের বক্সে **আপনার নাম** এবং **যার সাথে কথা বলবেন তার নাম** লিখুন।")
     else:
-
+        st.markdown(f"### 💬 কথোপকথন: {sender_clean} ⇄ {recipient_clean}")
+        
         try:
-
             result = (
                 supabase
                 .table("messages")
                 .select("*")
-                .eq(
-                    "conversation_id",
-                    conversation_id
-                )
-                .order(
-                    "created_at",
-                    desc=False
-                )
+                .eq("conversation_id", conversation_id)
+                .order("created_at", desc=False)
                 .execute()
             )
-
             messages = result.data or []
-
         except Exception as e:
-
             messages = []
+            st.error(f"❌ কথোপকথন লোড করতে সমস্যা হয়েছে: {e}")
 
-            st.error(
-                f"❌ কথোপকথন লোড করতে সমস্যা হয়েছে: {e}"
-            )
+        # Container for chat messages view
+        chat_box = st.container()
+        with chat_box:
+            if messages:
+                for m in messages:
+                    message_sender = str(m.get("sender_name") or m.get("student_name") or "অজানা")
+                    message_text = str(m.get("message") or "")
+                    message_time = str(m.get("created_at") or "")[:16].replace("T", " ")
 
-        # =================================================
-        # DISPLAY MESSAGES
-        # =================================================
-
-        if messages:
-
-            for m in messages:
-
-                message_sender = str(
-                    m.get("sender_name")
-                    or m.get("student_name")
-                    or "অজানা"
-                )
-
-                message_receiver = str(
-                    m.get("recipient_name")
-                    or "অজানা"
-                )
-
-                message_text = str(
-                    m.get("message")
-                    or ""
-                )
-
-                message_role = str(
-                    m.get("sender_role")
-                    or "student"
-                )
-
-                message_time = str(
-                    m.get("created_at")
-                    or ""
-                )
-
-                # -----------------------------------------
-                # নিজের message
-                # -----------------------------------------
-
-                if (
-                    message_sender.strip().lower()
-                    ==
-                    sender_clean.lower()
-                ):
-
-                    st.markdown(
-                        f"""
-                        <div style="
-                            background:#DCF8C6;
-                            padding:12px;
-                            border-radius:12px;
-                            margin:8px 0 8px 20%;
-                            border:1px solid #B7E5A0;
-                        ">
-
-                        <div style="
-                            text-align:right;
-                            font-weight:bold;
-                        ">
-                            আপনি 📤
-                        </div>
-
-                        <div style="
-                            font-size:16px;
-                            margin-top:7px;
-                        ">
-                            {message_text}
-                        </div>
-
-                        <div style="
-                            font-size:11px;
-                            color:#666;
-                            text-align:right;
-                            margin-top:7px;
-                        ">
-                            To: {message_receiver}<br>
-                            {message_time}
-                        </div>
-
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
-
-                # -----------------------------------------
-                # অন্য ব্যক্তির message
-                # -----------------------------------------
-
-                else:
-
-                    if message_role == "teacher":
-                        icon = "👨‍🏫"
+                    if message_sender.strip().lower() == sender_clean.lower():
+                        # Sent Message
+                        st.markdown(f"""
+                            <div class="chat-container">
+                                <div class="chat-bubble-sent">
+                                    <div style="font-size: 15px;">{message_text}</div>
+                                    <div class="chat-meta-sent">আপনি • {message_time}</div>
+                                </div>
+                            </div>
+                        """, unsafe_allow_html=True)
                     else:
-                        icon = "👨‍🎓"
+                        # Received Message
+                        icon = "👨‍🏫" if m.get("sender_role") == "teacher" else "👨‍🎓"
+                        st.markdown(f"""
+                            <div class="chat-container">
+                                <div class="chat-bubble-received">
+                                    <div style="font-size: 12px; font-weight: bold; color: #444; margin-bottom: 2px;">{icon} {message_sender}</div>
+                                    <div style="font-size: 15px;">{message_text}</div>
+                                    <div class="chat-meta-received">{message_time}</div>
+                                </div>
+                            </div>
+                        """, unsafe_allow_html=True)
+            else:
+                st.markdown("<p style='text-align: center; color: gray;'>এখনো কোনো বার্তা আদান-প্রদান হয়নি। প্রথম বার্তাটি পাঠিয়ে শুরু করুন!</p>", unsafe_allow_html=True)
 
-                    st.markdown(
-                        f"""
-                        <div style="
-                            background:#F1F1F1;
-                            padding:12px;
-                            border-radius:12px;
-                            margin:8px 20% 8px 0;
-                            border:1px solid #DDDDDD;
-                        ">
+    # =====================================================
+    # MESSAGE INPUT SECTION
+    # =====================================================
+    st.markdown("---")
+    
+    with st.form(key="chat_form", clear_on_submit=True):
+        msg = st.text_area(
+            "✍️ নতুন বার্তা লিখুন",
+            placeholder="আপনার বার্তা এখানে টাইপ করুন...",
+            height=80,
+            key="chat_message_input"
+        )
+        
+        col_btn1, col_btn2 = st.columns([6, 1])
+        with col_btn1:
+            submit_btn = st.form_submit_button("📤 বার্তা পাঠান", use_container_width=True)
 
-                        <div style="
-                            font-weight:bold;
-                        ">
-                            {icon} {message_sender}
-                        </div>
+        if submit_btn:
+            if not sender_clean:
+                st.warning("⚠️ অনুগ্রহ করে আপনার নাম লিখুন।")
+            elif not recipient_clean:
+                st.warning("⚠️ যার কাছে পাঠাবেন তার নাম লিখুন।")
+            elif not msg.strip():
+                st.warning("⚠️ মেসেজ খালি রাখা যাবে না।")
+            elif not conversation_id:
+                st.error("❌ চ্যাট আইডি তৈরি করা যায়নি।")
+            else:
+                message_data = {
+                    "conversation_id": conversation_id,
+                    "student_name": sender_clean if sender_role == "student" else recipient_clean,
+                    "sender_name": sender_clean,
+                    "sender_role": sender_role,
+                    "recipient_name": recipient_clean,
+                    "recipient_role": recipient_role,
+                    "message": msg.strip()
+                }
 
-                        <div style="
-                            font-size:16px;
-                            margin-top:7px;
-                        ">
-                            {message_text}
-                        </div>
-
-                        <div style="
-                            font-size:11px;
-                            color:#666;
-                            margin-top:7px;
-                        ">
-                            To: {message_receiver}<br>
-                            {message_time}
-                        </div>
-
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
-
-        else:
-
-            st.info(
-                "💬 এই ব্যক্তির সাথে এখনো কোনো "
-                "বার্তা আদান-প্রদান হয়নি।"
-            )
-
+                try:
+                    success, data, err = insert_row("messages", message_data)
+                    if success:
+                        st.success("✅ বার্তা পাঠানো হয়েছে!")
+                        st.rerun()
+                    else:
+                        st.error(f"❌ পাঠাতে সমস্যা হয়েছে: {err}")
+                except Exception as e:
+                    st.error(f"❌ সমস্যা হয়েছে: {e}")
 
 # ============================================================
 # ক্লাসসমূহ পেজ (এখানে যুক্ত করুন)
