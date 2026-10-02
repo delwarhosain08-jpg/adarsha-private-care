@@ -440,7 +440,27 @@ with st.sidebar:
         """,
         unsafe_allow_html=True
     )
+# শিক্ষকের পেজ এবং ছবি দেখানোর কোড
+if menu == "🏫 হোম":
+    st.title("স্বাগতম!")
+    # হোম পেজের অন্যান্য কন্টেন্ট...
 
+elif menu == "👨‍🏫 শিক্ষক":
+    st.markdown("## 👨‍🏫 শিক্ষক পরিচিতি")
+    
+    # গিটহাবে আপলোড করা আপনার ছবি দেখানোর জন্য
+    if Path("111111.jpg").exists():
+        st.image("111111.jpg", width=220, caption="আদর্শ প্রাইভেট কেয়ার")
+    else:
+        st.warning("ছবির ফাইলটি খুঁজে পাওয়া যায়নি।")
+        
+    st.markdown("---")
+    st.markdown("Delwar Hosain")
+    st.markdown("MBA")
+    st.markdown("**প্রতিষ্ঠানের নাম:** আদর্শ প্রাইভেট কেয়ার")
+
+elif menu == "📚 ক্লাসসমূহ":
+    # ক্লাস সম্পর্কিত কোড...
 
 # ============================================================
 # EDUCATIONAL DATA
