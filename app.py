@@ -443,7 +443,7 @@ with st.sidebar:
 
 
 # ============================================================
-# MAIN PAGE ROUTING & TEACHER SECTION
+# MAIN PAGE ROUTING & SECTIONS
 # ============================================================
 
 if "শিক্ষক" in menu:
@@ -456,10 +456,32 @@ if "শিক্ষক" in menu:
         st.warning("ছবির ফাইলটি খুঁজে পাওয়া যায়নি।")
         
     st.markdown("---")
-    st.markdown("Delwar Hosain")
-    st.markdown("MBA")
+    st.markdown("**শিক্ষকের নাম:** Delwar Hosain")
+    st.markdown("**শিক্ষাগত যোগ্যতা:** MBA")
     st.markdown("**প্রতিষ্ঠানের নাম:** আদর্শ প্রাইভেট কেয়ার")
 
+elif "আমাদের সম্পর্কে" in menu:
+    st.markdown("## ℹ️ আমাদের সম্পর্কে")
+    st.markdown("""
+    <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <h3>আদর্শ প্রাইভেট কেয়ার</h3>
+        <p>গুণগত শিক্ষা এবং একটি উজ্জ্বল ভবিষ্যৎ গঠনে আমরা বদ্ধপরিকর। আমাদের এখানে ৫ম থেকে ১০ম শ্রেণি পর্যন্ত গণিত, ইংরেজি ও ব্যবসায় শিক্ষা বিষয়ে অত্যন্ত যত্নসহকারে পাঠদান করা হয়।</p>
+        <p><b>আমাদের লক্ষ্য:</b> প্রতিটি শিক্ষার্থীর মেধার পূর্ণ বিকাশ ঘটানো এবং পড়াশোনায় তাদের আত্মবিশ্বাস ফিরিয়ে আনা।</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+elif "যোগাযোগ" in menu:
+    st.markdown("## 📞 যোগাযোগ করুন")
+    st.markdown("""
+    <div style="background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <h3>যোগাযোগের মাধ্যম</h3>
+        <p><b>📧 ইমেইল:</b> delwarhosain08@gmail.com</p>
+        <p><b>📱 মোবাইল:</b> 01563148910</p>
+        <p><b>💬 WhatsApp:</b> 01734165721</p>
+        <p><b>📘 ফেসবুক পেজ:</b> <a href="https://www.facebook.com/share/1J55ZjGBqT/" target="_blank">আমাদের ফেসবুক পেজে ভিজিট করুন</a></p>
+        <p><b>▶️ ইউটিউব চ্যানেল:</b> <a href="https://www.youtube.com/@teach.20accademy" target="_blank">আমাদের ইউটিউব চ্যানেল</a></p>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ============================================================
 # EDUCATIONAL DATA
