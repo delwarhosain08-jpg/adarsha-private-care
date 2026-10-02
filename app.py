@@ -441,7 +441,7 @@ with st.sidebar:
         unsafe_allow_html=True
     )
     
-   elif "শিক্ষক" in menu:
+ elif "শিক্ষক" in menu:
     st.markdown("## 👨‍🏫 শিক্ষক পরিচিতি")
     
     # গিটহাবে আপলোড করা আপনার ছবি দেখানোর কোড
@@ -454,6 +454,7 @@ with st.sidebar:
     st.markdown("Delwar Hosain")
     st.markdown("MBA")
     st.markdown("**প্রতিষ্ঠানের নাম:** আদর্শ প্রাইভেট কেয়ার")
+    
 # ============================================================
 # EDUCATIONAL DATA
 # ============================================================
