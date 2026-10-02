@@ -1,0 +1,15 @@
+{
+  "name": "আদর্শ প্রাইভেট কেয়ার",
+  "short_name": "আদর্শ কেয়ার",
+  "start_url": "https://adarshaprivtecare.streamlit.app/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0084ff",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
