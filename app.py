@@ -409,7 +409,7 @@ with st.sidebar:
 
     st.markdown("---")
 
-   menu = st.radio(
+    menu = st.radio(
         "📌 প্রধান মেনু",
         [
             "🏠 হোম",
