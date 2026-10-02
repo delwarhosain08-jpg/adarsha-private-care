@@ -6,6 +6,13 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+# ব্রাউজার টাইটেল এবং আইকন পুরোপুরি সেট করার জন্য অতিরিক্ত এইচটিএমএল ট্যাগ
+st.markdown("""
+    <script>
+        document.title = "আদর্শ প্রাইভেট কেয়ার";
+    </script>
+""", unsafe_allow_html=True)
 # ============================================================
 # আদর্শ প্রাইভেট কেয়ার
 # Professional Coaching Management System
