@@ -244,164 +244,262 @@ def delete_row(table_name, match_column, match_value):
         return False, str(error)
 
 
+
+# ============================================================
+# CUSTOM CSS - ADARSHA PRIVATE CARE
+# Clear Text | White Background | Professional UI
+# ============================================================
+
 st.markdown(
     """
     <style>
-    /* অ্যাপের মূল ব্যাকগ্রাউন্ড এবং লেখার ডিফল্ট রঙ */
+
+    /* Main application background */
     .stApp {
-        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 45%, #0f172a 100%) !important;
-        color: #ffffff !important;
+        background: #f5f7fb;
+        color: #1e293b;
     }
-    
+
+    /* Main content area */
     .main {
         padding-top: 1rem;
     }
-    
-    /* সাইডবারের ডিজাইন */
+
+    [data-testid="stMain"] {
+        background: #f5f7fb;
+        color: #1e293b;
+    }
+
+    [data-testid="stMain"] p,
+    [data-testid="stMain"] label,
+    [data-testid="stMain"] li,
+    [data-testid="stMain"] span,
+    [data-testid="stMain"] small {
+        color: #263449;
+    }
+
+    /* Headings */
+    h1, h2, h3, h4, h5, h6 {
+        color: #172554 !important;
+        font-weight: 800 !important;
+    }
+
+    /* Sidebar */
     section[data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #090d16 0%, #1e1b4b 100%) !important;
+        background: #202b5c;
     }
-    section[data-testid="stSidebar"] * {
+
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] div,
+    section[data-testid="stSidebar"] small {
+        color: #ffffff;
+    }
+
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3 {
         color: #ffffff !important;
     }
-    
-    /* সকল হেডিং ও টেক্সট স্পষ্ট সাদা করার জন্য */
-    h1, h2, h3, h4, h5, h6, p, span, label, div {
-        color: #ffffff !important;
-    }
-    
+
+    /* Hero banner */
     .hero {
-        background: linear-gradient(135deg, #4f46e5, #7c3aed, #db2777);
+        background: linear-gradient(
+            135deg, #243b80, #5145cd, #7c3aed
+        );
         padding: 42px 25px;
-        border-radius: 28px;
-        color: white;
-        box-shadow: 0 15px 40px rgba(79,70,229,0.30);
+        border-radius: 24px;
+        color: #ffffff;
+        box-shadow: 0 12px 30px rgba(36, 59, 128, 0.20);
         margin-bottom: 25px;
         text-align: center;
     }
+
     .hero-title {
-        color: white !important;
+        color: #ffffff !important;
         font-size: 42px;
         font-weight: 800;
         margin-bottom: 10px;
     }
+
     .hero-subtitle {
-        color: #f5f3ff !important;
+        color: #f8fafc !important;
         font-size: 20px;
         margin: 8px 0;
     }
+
     .hero-description {
-        color: #ede9fe !important;
+        color: #f1f5f9 !important;
         font-size: 15px;
         margin-top: 15px;
     }
-    
-    /* কার্ড বা বক্সগুলোর ব্যাকগ্রাউন্ড ডার্ক ও গ্লাস ইফেক্ট */
-    .card {
-        background: rgba(15, 23, 42, 0.85) !important;
-        padding: 25px;
-        border-radius: 22px;
-        box-shadow: 0 8px 28px rgba(0,0,0,0.3);
-        border: 1px solid rgba(129, 140, 248, 0.3);
+
+    /* General cards */
+    .card,
+    .feature,
+    .contact-card,
+    .stat-card {
+        background: #ffffff;
+        color: #1e293b;
+        border: 1px solid #dbe3ef;
+        border-radius: 18px;
+        padding: 24px;
+        box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
         margin-bottom: 20px;
-        color: #ffffff !important;
     }
+
     .feature {
-        background: rgba(30, 27, 75, 0.9) !important;
-        padding: 25px;
         min-height: 190px;
-        border-radius: 20px;
         text-align: center;
-        box-shadow: 0 7px 25px rgba(0,0,0,0.3);
-        border: 1px solid rgba(129, 140, 248, 0.2);
-        margin-bottom: 20px;
-        color: #ffffff !important;
     }
+
     .feature-icon {
-        font-size: 45px;
+        font-size: 42px;
         margin-bottom: 10px;
     }
+
     .contact-card {
-        background: linear-gradient(135deg, #1e1b4b, #312e81) !important;
-        padding: 22px;
         min-height: 150px;
-        border-radius: 20px;
         text-align: center;
-        box-shadow: 0 7px 22px rgba(0,0,0,0.3);
-        color: #ffffff !important;
     }
+
     .contact-icon {
         font-size: 35px;
     }
+
+    /* Social links */
     .social-button {
         display: block;
         text-align: center;
         padding: 14px;
         margin: 8px 0;
         border-radius: 12px;
-        background: linear-gradient(90deg, #4f46e5, #7c3aed);
-        color: white !important;
+        background: #4338ca;
+        color: #ffffff !important;
         text-decoration: none;
         font-weight: 700;
     }
+
     .social-button:hover {
-        opacity: 0.88;
+        background: #312e81;
     }
+
+    /* Notices */
     .notice {
-        background: rgba(30, 27, 75, 0.95) !important;
-        border-left: 6px solid #818cf8;
+        background: #ffffff;
+        color: #1e293b;
+        border-left: 5px solid #4f46e5;
         padding: 20px;
-        border-radius: 15px;
+        border-radius: 12px;
         margin-bottom: 15px;
-        box-shadow: 0 5px 18px rgba(0,0,0,0.3);
-        color: #ffffff !important;
+        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
     }
+
     .info-box {
-        background: linear-gradient(135deg, #1e1b4b, #312e81) !important;
+        background: #eef2ff;
+        color: #1e293b;
         padding: 20px;
-        border-radius: 18px;
-        border: 1px solid #818cf8;
+        border-radius: 14px;
+        border: 1px solid #c7d2fe;
         margin-bottom: 20px;
-        color: #ffffff !important;
     }
+
+    /* Statistics */
     .stat-card {
-        background: rgba(15, 23, 42, 0.85) !important;
-        padding: 22px;
-        border-radius: 20px;
         text-align: center;
-        box-shadow: 0 7px 25px rgba(0,0,0,0.3);
-        border: 1px solid rgba(129, 140, 248, 0.2);
-        color: #ffffff !important;
     }
+
     .stat-number {
         font-size: 32px;
         font-weight: 800;
-        color: #818cf8 !important;
+        color: #4338ca !important;
     }
+
     .stat-label {
-        color: #cbd5e1 !important;
+        color: #475569 !important;
         font-size: 14px;
     }
-    
-    /* ইনপুট ফিল্ডগুলো পরিষ্কার দেখার জন্য */
-    input, textarea, select {
-        background-color: #0f172a !important;
-        color: #ffffff !important;
-        border: 1px solid #818cf8 !important;
+
+    /* Input fields */
+    .stApp input,
+    .stApp textarea,
+    .stApp [data-baseweb="select"] > div {
+        background-color: #ffffff !important;
+        color: #172033 !important;
+        border-color: #cbd5e1 !important;
     }
-    
+
+    .stApp input::placeholder,
+    .stApp textarea::placeholder {
+        color: #64748b !important;
+        opacity: 1;
+    }
+
+    /* Dropdown options */
+    [role="listbox"],
+    [role="option"] {
+        background-color: #ffffff;
+        color: #172033 !important;
+    }
+
+    /* Buttons */
+    .stApp .stButton > button,
+    .stApp .stDownloadButton > button {
+        background: #4338ca;
+        color: #ffffff !important;
+        border: 1px solid #4338ca;
+        border-radius: 10px;
+        font-weight: 700;
+    }
+
+    .stApp .stButton > button:hover,
+    .stApp .stDownloadButton > button:hover {
+        background: #312e81;
+        color: #ffffff !important;
+        border-color: #312e81;
+    }
+
+    /* Data tables */
+    [data-testid="stDataFrame"],
+    [data-testid="stTable"] {
+        background: #ffffff;
+        color: #172033;
+    }
+
+    /* Alerts and messages */
+    [data-testid="stAlert"] {
+        border-radius: 12px;
+    }
+
+    /* Footer */
     .footer {
         text-align: center;
-        padding: 35px 20px;
-        color: #94a3b8 !important;
+        padding: 30px 20px;
+        color: #475569;
         font-size: 14px;
         margin-top: 30px;
     }
+
+    /* Mobile layout */
     @media (max-width: 768px) {
-        .hero-title { font-size: 30px; }
-        .hero-subtitle { font-size: 16px; }
-        .feature { min-height: auto; }
+        .hero {
+            padding: 28px 16px;
+        }
+
+        .hero-title {
+            font-size: 29px;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+        }
+
+        .feature {
+            min-height: auto;
+        }
     }
+
     </style>
     """,
     unsafe_allow_html=True
