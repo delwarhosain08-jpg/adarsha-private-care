@@ -245,104 +245,134 @@ def delete_row(table_name, match_column, match_value):
 
 
 
+
 # ============================================================
 # CUSTOM CSS - ADARSHA PRIVATE CARE
-# Clear Text | White Background | Professional UI
+# Stable Background | Clear Text | Professional UI
 # ============================================================
 
 st.markdown(
     """
     <style>
 
-    /* Main application background */
+    /* =========================================
+       1. STABLE APPLICATION BACKGROUND
+       ========================================= */
+
+    html,
+    body,
+    [data-testid="stAppViewContainer"],
+    [data-testid="stMain"],
     .stApp {
-        background: #f5f7fb;
-        color: #1e293b;
+        background: #F5F7FB !important;
+        background-image: none !important;
+        color: #1E293B !important;
     }
 
-    /* Main content area */
     .main {
         padding-top: 1rem;
     }
 
-    [data-testid="stMain"] {
-        background: #f5f7fb;
-        color: #1e293b;
+    [data-testid="stHeader"] {
+        background: #F5F7FB !important;
     }
 
-    [data-testid="stMain"] p,
-    [data-testid="stMain"] label,
-    [data-testid="stMain"] li,
-    [data-testid="stMain"] span,
-    [data-testid="stMain"] small {
-        color: #263449;
+    [data-testid="stMain"] > div {
+        background-color: transparent !important;
     }
 
-    /* Headings */
-    h1, h2, h3, h4, h5, h6 {
+    /* =========================================
+       2. MAIN TEXT AND HEADINGS
+       ========================================= */
+
+    [data-testid="stMain"] h1,
+    [data-testid="stMain"] h2,
+    [data-testid="stMain"] h3,
+    [data-testid="stMain"] h4,
+    [data-testid="stMain"] h5,
+    [data-testid="stMain"] h6 {
         color: #172554 !important;
         font-weight: 800 !important;
     }
 
-    /* Sidebar */
-    section[data-testid="stSidebar"] {
-        background: #202b5c;
+    [data-testid="stMain"] p,
+    [data-testid="stMain"] li,
+    [data-testid="stMain"] label,
+    [data-testid="stMain"] small {
+        color: #263449;
     }
 
-    section[data-testid="stSidebar"] p,
-    section[data-testid="stSidebar"] label,
-    section[data-testid="stSidebar"] span,
-    section[data-testid="stSidebar"] div,
-    section[data-testid="stSidebar"] small {
-        color: #ffffff;
+    /* =========================================
+       3. SIDEBAR
+       ========================================= */
+
+    section[data-testid="stSidebar"] {
+        background: #202B5C !important;
+        background-image: none !important;
     }
 
     section[data-testid="stSidebar"] h1,
     section[data-testid="stSidebar"] h2,
-    section[data-testid="stSidebar"] h3 {
-        color: #ffffff !important;
+    section[data-testid="stSidebar"] h3,
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] label,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] small {
+        color: #FFFFFF !important;
     }
 
-    /* Hero banner */
+    /* Sidebar links */
+    section[data-testid="stSidebar"] a {
+        color: #E0E7FF !important;
+    }
+
+    /* =========================================
+       4. HERO BANNER
+       ========================================= */
+
     .hero {
         background: linear-gradient(
-            135deg, #243b80, #5145cd, #7c3aed
-        );
+            135deg, #243B80, #5145CD, #7C3AED
+        ) !important;
         padding: 42px 25px;
         border-radius: 24px;
-        color: #ffffff;
+        color: #FFFFFF !important;
         box-shadow: 0 12px 30px rgba(36, 59, 128, 0.20);
         margin-bottom: 25px;
         text-align: center;
     }
 
     .hero-title {
-        color: #ffffff !important;
+        color: #FFFFFF !important;
         font-size: 42px;
         font-weight: 800;
         margin-bottom: 10px;
     }
 
     .hero-subtitle {
-        color: #f8fafc !important;
+        color: #F8FAFC !important;
         font-size: 20px;
         margin: 8px 0;
     }
 
     .hero-description {
-        color: #f1f5f9 !important;
+        color: #F1F5F9 !important;
         font-size: 15px;
         margin-top: 15px;
     }
 
-    /* General cards */
+    /* =========================================
+       5. CARDS
+       ========================================= */
+
     .card,
     .feature,
     .contact-card,
-    .stat-card {
-        background: #ffffff;
-        color: #1e293b;
-        border: 1px solid #dbe3ef;
+    .stat-card,
+    .notice {
+        background: #FFFFFF !important;
+        color: #1E293B !important;
+        border: 1px solid #DBE3EF;
         border-radius: 18px;
         padding: 24px;
         box-shadow: 0 5px 18px rgba(15, 23, 42, 0.06);
@@ -368,44 +398,75 @@ st.markdown(
         font-size: 35px;
     }
 
-    /* Social links */
+    /* Card text */
+    .card h1,
+    .card h2,
+    .card h3,
+    .feature h1,
+    .feature h2,
+    .feature h3,
+    .contact-card h2,
+    .contact-card h3 {
+        color: #172554 !important;
+    }
+
+    .card p,
+    .feature p,
+    .contact-card p,
+    .notice p {
+        color: #263449 !important;
+    }
+
+    /* =========================================
+       6. SOCIAL BUTTONS
+       ========================================= */
+
     .social-button {
         display: block;
         text-align: center;
         padding: 14px;
         margin: 8px 0;
         border-radius: 12px;
-        background: #4338ca;
-        color: #ffffff !important;
+        background: #4338CA !important;
+        color: #FFFFFF !important;
         text-decoration: none;
         font-weight: 700;
     }
 
     .social-button:hover {
-        background: #312e81;
+        background: #312E81 !important;
     }
 
-    /* Notices */
+    /* =========================================
+       7. NOTICE AND INFORMATION BOXES
+       ========================================= */
+
     .notice {
-        background: #ffffff;
-        color: #1e293b;
-        border-left: 5px solid #4f46e5;
-        padding: 20px;
+        border-left: 5px solid #4F46E5;
         border-radius: 12px;
-        margin-bottom: 15px;
-        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+        padding: 20px;
     }
 
     .info-box {
-        background: #eef2ff;
-        color: #1e293b;
+        background: #EEF2FF !important;
+        color: #1E293B !important;
         padding: 20px;
         border-radius: 14px;
-        border: 1px solid #c7d2fe;
+        border: 1px solid #C7D2FE;
         margin-bottom: 20px;
     }
 
-    /* Statistics */
+    .info-box h1,
+    .info-box h2,
+    .info-box h3,
+    .info-box p {
+        color: #1E293B !important;
+    }
+
+    /* =========================================
+       8. STATISTICS
+       ========================================= */
+
     .stat-card {
         text-align: center;
     }
@@ -413,7 +474,7 @@ st.markdown(
     .stat-number {
         font-size: 32px;
         font-weight: 800;
-        color: #4338ca !important;
+        color: #4338CA !important;
     }
 
     .stat-label {
@@ -421,67 +482,92 @@ st.markdown(
         font-size: 14px;
     }
 
-    /* Input fields */
-    .stApp input,
-    .stApp textarea,
-    .stApp [data-baseweb="select"] > div {
-        background-color: #ffffff !important;
+    /* =========================================
+       9. INPUTS AND TEXT AREAS
+       ========================================= */
+
+    [data-testid="stMain"] input,
+    [data-testid="stMain"] textarea {
+        background-color: #FFFFFF !important;
         color: #172033 !important;
-        border-color: #cbd5e1 !important;
+        border-color: #CBD5E1 !important;
+        caret-color: #4338CA;
     }
 
-    .stApp input::placeholder,
-    .stApp textarea::placeholder {
-        color: #64748b !important;
+    [data-testid="stMain"] input::placeholder,
+    [data-testid="stMain"] textarea::placeholder {
+        color: #64748B !important;
         opacity: 1;
     }
 
-    /* Dropdown options */
+    /* Select boxes */
+    [data-testid="stMain"] [data-baseweb="select"] > div {
+        background-color: #FFFFFF !important;
+        color: #172033 !important;
+        border-color: #CBD5E1 !important;
+    }
+
+    /* Dropdown menus */
     [role="listbox"],
     [role="option"] {
-        background-color: #ffffff;
+        background-color: #FFFFFF !important;
         color: #172033 !important;
     }
 
-    /* Buttons */
-    .stApp .stButton > button,
-    .stApp .stDownloadButton > button {
-        background: #4338ca;
-        color: #ffffff !important;
-        border: 1px solid #4338ca;
+    /* =========================================
+       10. BUTTONS
+       ========================================= */
+
+    [data-testid="stMain"] .stButton > button,
+    [data-testid="stMain"] .stDownloadButton > button {
+        background: #4338CA !important;
+        color: #FFFFFF !important;
+        border: 1px solid #4338CA !important;
         border-radius: 10px;
         font-weight: 700;
     }
 
-    .stApp .stButton > button:hover,
-    .stApp .stDownloadButton > button:hover {
-        background: #312e81;
-        color: #ffffff !important;
-        border-color: #312e81;
+    [data-testid="stMain"] .stButton > button:hover,
+    [data-testid="stMain"] .stDownloadButton > button:hover {
+        background: #312E81 !important;
+        color: #FFFFFF !important;
+        border-color: #312E81 !important;
     }
 
-    /* Data tables */
+    /* =========================================
+       11. TABLES
+       ========================================= */
+
     [data-testid="stDataFrame"],
     [data-testid="stTable"] {
-        background: #ffffff;
+        background: #FFFFFF;
         color: #172033;
     }
 
-    /* Alerts and messages */
+    /* =========================================
+       12. ALERTS AND STATUS MESSAGES
+       ========================================= */
+
     [data-testid="stAlert"] {
         border-radius: 12px;
     }
 
-    /* Footer */
+    /* =========================================
+       13. FOOTER
+       ========================================= */
+
     .footer {
         text-align: center;
         padding: 30px 20px;
-        color: #475569;
+        color: #475569 !important;
         font-size: 14px;
         margin-top: 30px;
     }
 
-    /* Mobile layout */
+    /* =========================================
+       14. MOBILE RESPONSIVE DESIGN
+       ========================================= */
+
     @media (max-width: 768px) {
         .hero {
             padding: 28px 16px;
@@ -497,6 +583,13 @@ st.markdown(
 
         .feature {
             min-height: auto;
+        }
+
+        .card,
+        .contact-card,
+        .stat-card,
+        .notice {
+            padding: 18px;
         }
     }
 
