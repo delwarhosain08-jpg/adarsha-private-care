@@ -2002,16 +2002,10 @@ elif menu == "📚 স্টাডি ম্যাটেরিয়াল":
                 key="study_material_image"
             )
 
-            uploaded_file = st.file_uploader(
+            
             uploaded_file = st.file_uploader(
                 "📎 PDF / Document নির্বাচন করুন",
-                type=[
-                    "pdf",
-                    "xlsx",
-                    "xls",
-                    "docx",
-                    "csv"
-                ],
+                type=["pdf", "xlsx", "xls", "docx", "csv"],
                 key="study_material_file"
             )
 
