@@ -2003,6 +2003,7 @@ elif menu == "📚 স্টাডি ম্যাটেরিয়াল":
             )
 
             uploaded_file = st.file_uploader(
+            uploaded_file = st.file_uploader(
                 "📎 PDF / Document নির্বাচন করুন",
                 type=[
                     "pdf",
@@ -2014,9 +2015,8 @@ elif menu == "📚 স্টাডি ম্যাটেরিয়াল":
                 key="study_material_file"
             )
 
-
             # -------------------------------------------------
-            # SAVE
+            # SAVE STUDY MATERIAL
             # -------------------------------------------------
 
             if st.button(
@@ -2050,16 +2050,13 @@ elif menu == "📚 স্টাডি ম্যাটেরিয়াল":
                         file_url = None
                         file_name = None
 
-
                         # =================================
-                        # IMAGE
+                        # IMAGE UPLOAD
                         # =================================
 
                         if uploaded_image is not None:
 
-                            image_bytes = (
-                                uploaded_image.getvalue()
-                            )
+                            image_bytes = uploaded_image.getvalue()
 
                             image_path = (
                                 "images/"
@@ -2076,35 +2073,27 @@ elif menu == "📚 স্টাডি ম্যাটেরিয়াল":
                                 image_path,
                                 image_bytes,
                                 {
-                                    "content-type":
+                                    "content-type": (
                                         uploaded_image.type
+                                        or "application/octet-stream"
+                                    )
                                 }
                             )
 
                             image_url = (
                                 supabase.storage
-                                .from_(
-                                    "study-materials"
-                                )
-                                .get_public_url(
-                                    image_path
-                                )
+                                .from_("study-materials")
+                                .get_public_url(image_path)
                             )
 
-
                         # =================================
-                        # FILE
+                        # FILE UPLOAD
                         # =================================
 
                         if uploaded_file is not None:
 
-                            file_bytes = (
-                                uploaded_file.getvalue()
-                            )
-
-                            file_name = (
-                                uploaded_file.name
-                            )
+                            file_bytes = uploaded_file.getvalue()
+                            file_name = uploaded_file.name
 
                             file_path = (
                                 "files/"
@@ -2121,74 +2110,49 @@ elif menu == "📚 স্টাডি ম্যাটেরিয়াল":
                                 file_path,
                                 file_bytes,
                                 {
-                                    "content-type":
+                                    "content-type": (
                                         uploaded_file.type
+                                        or "application/octet-stream"
+                                    )
                                 }
                             )
 
                             file_url = (
                                 supabase.storage
-                                .from_(
-                                    "study-materials"
-                                )
-                                .get_public_url(
-                                    file_path
-                                )
+                                .from_("study-materials")
+                                .get_public_url(file_path)
                             )
 
-
                         # =================================
-                        # DATABASE
+                        # DATABASE SAVE
                         # =================================
 
                         material_data = {
-
-                            "title":
-                                material_title.strip(),
-
-                            "class_name":
-                                material_class,
-
-                            "subject":
-                                material_subject,
-
-                            "material_type":
-                                material_type,
-
-                            "description":
-                                description.strip(),
-
-                            "content":
-                                material_content.strip(),
-
-                            "image_url":
-                                image_url,
-
-                            "file_url":
-                                file_url,
-
-                            "file_name":
-                                file_name,
-
-                            "uploaded_by":
-                                st.session_state.get(
-                                    "user_name",
-                                    "Admin"
-                                )
+                            "title": material_title.strip(),
+                            "class_name": material_class,
+                            "subject": material_subject,
+                            "material_type": material_type,
+                            "description": description.strip(),
+                            "content": material_content.strip(),
+                            "image_url": image_url,
+                            "file_url": file_url,
+                            "file_name": file_name,
+                            "uploaded_by": st.session_state.get(
+                                "user_name",
+                                "Admin"
+                            )
                         }
-
 
                         success, data, err = insert_row(
                             "study_materials",
                             material_data
                         )
 
-
                         if success:
 
                             st.success(
-                                "✅ Study Material "
-                                "সফলভাবে সংরক্ষণ করা হয়েছে!"
+                                "✅ Study Material সফলভাবে "
+                                "সংরক্ষণ করা হয়েছে!"
                             )
 
                             st.rerun()
@@ -2199,92 +2163,22 @@ elif menu == "📚 স্টাডি ম্যাটেরিয়াল":
                                 f"❌ Material সংরক্ষণে সমস্যা: {err}"
                             )
 
-
                     except Exception as e:
 
                         st.error(
-                            f"❌ Study Material যোগ করতে সমস্যা: {e}"
+                            "❌ Study Material যোগ করতে সমস্যা: "
+                            f"{e}"
                         )
 
-    # =====================================================
-    # CHAT HISTORY
-    # =====================================================
-
-    if "ai_chat_history" not in st.session_state:
-
-        st.session_state.ai_chat_history = []
-
-    # =====================================================
-    # PREVIOUS CHAT
-    # =====================================================
-
-    if st.session_state.ai_chat_history:
-
-        st.markdown("### 💬 আগের কথোপকথন")
-
-        for chat in st.session_state.ai_chat_history:
-
-            if chat["role"] == "user":
-
-                with st.chat_message("user"):
-
-                    st.markdown(
-                        chat["content"]
-                    )
-
-            elif chat["role"] == "assistant":
-
-                with st.chat_message("assistant"):
-
-                    st.markdown(
-                        chat["content"]
-                    )
-
-    # =====================================================
-    # USER QUESTION
-    # =====================================================
-
-    user_question = st.chat_input(
-        "আপনার প্রশ্ন লিখুন... যেমন: (a+b)² এর সূত্র বুঝিয়ে দাও"
-    )
-
-    # =====================================================
-    # AI RESPONSE
-    # =====================================================
-
-    if user_question:
-
-        # -------------------------------------------------
-        # User message দেখানো
-        # -------------------------------------------------
-
-        with st.chat_message("user"):
-
-            st.markdown(
-                user_question
-            )
-
-        # History-তে User message সংরক্ষণ
-        st.session_state.ai_chat_history.append(
-            {
-                "role": "user",
-                "content": user_question
-            }
-        )
 
 # =====================================================
-# CHAT CONTROL
+# AI ASSISTANT — GEMINI REMOVED
 # =====================================================
 
-if "ai_chat_history" in st.session_state and st.session_state.ai_chat_history:
+st.markdown("---")
+st.markdown("### 🤖 AI শিক্ষা সহকারী")
 
-    st.markdown("---")
-
-    if st.button(
-        "🗑️ কথোপকথন মুছে ফেলুন",
-        key="clear_ai_chat"
-    ):
-
-        st.session_state.ai_chat_history = []
-
-st.rerun()
+st.info(
+    "AI সহকারীর স্বয়ংক্রিয় উত্তর দেওয়ার সুবিধাটি আপাতত বন্ধ আছে। "
+    "Study Material ও অন্যান্য সুবিধা ব্যবহার করতে পারবেন।"
+)
