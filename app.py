@@ -552,12 +552,12 @@ elif menu == "💬 ছাত্র-ছাত্রী চ্যাট":
                 except Exception as e:
                     st.error(f"❌ সমস্যা হয়েছে: {e}")
 
-eelif menu == "🤖 এআই লার্নিং কর্নার (EduMagiX)":
+elif menu == "🤖 এআই লার্নিং কর্নার (EduMagiX)":
     st.markdown("## ✨ EduMagiX: কঠিন পড়াশোনা হোক পানির মতো সহজ")
     st.markdown("### পাঠ্যবইয়ের যেকোনো জটিল বিষয়, থিওরি বা সমীকরণ এখানে লিখুন—আপনার পছন্দমতো মোডে এআই সেটি বুঝিয়ে দেবে।")
     
     # আপনার জেমিনি এপিআই কি এখানে বসিয়ে দিন (AIzaSy দিয়ে শুরু হওয়া সঠিক কি)
-    GEMINI_API_KEY = "AQ.Ab8RN6Km-jxlHJqpZDHCAt6uYT-VyFnc8ZyYvBSc0_8xtz0KBQ"
+    GEMINI_API_KEY = "আপনার_সঠিক_এআই_কি_এখানে_বসান"
 
     # ৫টি ভিন্ন মোডের জন্য ট্যাব
     tab1, tab2, tab3, tab4, tab5 = st.tabs([
@@ -674,7 +674,6 @@ eelif menu == "🤖 এআই লার্নিং কর্নার (EduMagiX
                         st.error(f"ত্রুটি দেখা দিয়েছে: {e}")
             else:
                 st.warning("দয়া করে কোনো ম্যাথ বা শর্টকাটের নাম লিখুন!")
-
 elif menu == "📞 যোগাযোগ":
     st.markdown("## 📞 যোগাযোগ করুন")
     st.markdown("""
