@@ -552,36 +552,128 @@ elif menu == "💬 ছাত্র-ছাত্রী চ্যাট":
                 except Exception as e:
                     st.error(f"❌ সমস্যা হয়েছে: {e}")
 
-elif menu == "🤖 এআই লার্নিং কর্নার (EduMagiX)":
-    st.markdown("## 🤖 এআই লার্নিং কর্নার (EduMagiX)")
-    st.markdown("পড়াশোনার যেকোনো জটিল বিষয়, গল্প বা ম্যাথ শর্টকাট এখানে এআই-এর মাধ্যমে খুব সহজে বুঝে নিন।")
+eelif menu == "🤖 এআই লার্নিং কর্নার (EduMagiX)":
+    st.markdown("## ✨ EduMagiX: কঠিন পড়াশোনা হোক পানির মতো সহজ")
+    st.markdown("### পাঠ্যবইয়ের যেকোনো জটিল বিষয়, থিওরি বা সমীকরণ এখানে লিখুন—আপনার পছন্দমতো মোডে এআই সেটি বুঝিয়ে দেবে।")
     
-    topic = st.text_area("কোন বিষয়টি সম্পর্কে জানতে বা বুঝতে চান?", placeholder="যেমন: নিউটনের গতির তৃতীয় সূত্র বা ১১ দিয়ে গুণ করার শর্টকাট...", key="ai_topic_input")
-    
-    if st.button("এআই ব্যাখ্যা তৈরি করুন 🚀", key="ai_btn"):
-        if topic.strip() != "":
-            with st.spinner("এআই চমৎকারভাবে ব্যাখ্যা তৈরি করছে... ⏳"):
-                try:
-                    genai.configure(api_key=GEMINI_API_KEY)
-                    model = genai.GenerativeModel('gemini-3.8-flash')
-                    prompt = f"Explain '{topic}' in a very engaging, simple storytelling and easy-to-understand format for students in fluent Bengali."
-                    response = model.generate_content(prompt)
-                    st.success("✅ এআই এর সহজ ব্যাখ্যা:")
-                    st.markdown(response.text)
-                except Exception as e:
-                    st.error(f"ত্রুটি দেখা দিয়েছে: {e}")
-        else:
-            st.warning("দয়া করে কিছু একটা লিখুন!")
+    # আপনার জেমিনি এপিআই কি এখানে বসিয়ে দিন (AIzaSy দিয়ে শুরু হওয়া সঠিক কি)
+    GEMINI_API_KEY = "AQ.Ab8RN6Km-jxlHJqpZDHCAt6uYT-VyFnc8ZyYvBSc0_8xtz0KBQ"
 
-elif menu == "ℹ আমাদের সম্পর্কে":
-    st.markdown("## ℹ️ আমাদের সম্পর্কে")
-    st.markdown("""
-    <div class="card">
-        <h3>আদর্শ প্রাইভেট কেয়ার</h3>
-        <p>গুণগত শিক্ষা এবং একটি উজ্জ্বল ভবিষ্যৎ গঠনে আমরা বদ্ধপরিকর। আমাদের এখানে তৃতীয় থেকে দশম শ্রেণি পর্যন্ত গণিত, ইংরেজি ও ব্যবসায় শিক্ষা বিষয়ে অত্যন্ত যত্নসহকারে পাঠদান করা হয়।</p>
-        <p><b>আমাদের লক্ষ্য:</b> প্রতিটি শিক্ষার্থীর মেধার পূর্ণ বিকাশ ঘটানো, প্রতিটি ছাত্র ছাত্রীর বেসিক তৈরি করা আমাদের লক্ষ্য এবং পড়াশোনায় তাদের আত্মবিশ্বাস ফিরিয়ে আনা।</p>
-    </div>
-    """, unsafe_allow_html=True)
+    # ৫টি ভিন্ন মোডের জন্য ট্যাব
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+        "📖 গল্পের ছলে (Story Mode)", 
+        "📊 গ্রাফ ও চার্ট (Visuals)", 
+        "🔍 গভীর বিশ্লেষণ (Analysis)", 
+        "📝 সারসংক্ষেপ (Summary)", 
+        "⚡ ম্যাথ শর্টকাট (Logic)"
+    ])
+
+    # ----------------- ট্যাব ১: গল্পের ছলে শিক্ষা -----------------
+    with tab1:
+        st.subheader("📖 গল্পের মাধ্যমে যেকোনো জটিল বিষয় বুঝুন")
+        topic_story = st.text_area("কোন বিষয়টি গল্প আকারে জানতে চান?", placeholder="যেমন: নিউটনের গতির তৃতীয় সূত্র বা সালোকসংশ্লেষণ...", key="story_input")
+        
+        if st.button("গল্প তৈরি করুন 🚀", key="btn_story"):
+            if topic_story.strip() != "":
+                with st.spinner("এআই চমৎকার একটি গল্প বুনছে... ⏳"):
+                    try:
+                        genai.configure(api_key=GEMINI_API_KEY)
+                        model = genai.GenerativeModel('gemini-3.8-flash')
+                        prompt = f"Explain '{topic_story}' as a very engaging, simple storytelling format (ELI5) for students in fluent Bengali."
+                        response = model.generate_content(prompt)
+                        st.success("✅ গল্পের ছলে ব্যাখ্যা:")
+                        st.markdown(response.text)
+                    except Exception as e:
+                        st.error(f"ত্রুটি দেখা দিয়েছে: {e}")
+            else:
+                st.warning("দয়া করে কিছু একটা লিখুন!")
+
+    # ----------------- ট্যাব ২: গ্রাফ ও ভিজ্যুয়াল চার্ট -----------------
+    with tab2:
+        st.subheader("📊 ডেটা, গ্রাফ ও ভিজ্যুয়াল চার্টের মাধ্যমে প্রদর্শন")
+        topic_chart = st.text_input("কোন বিষয়ের গ্রাফ বা ভিজ্যুয়াল ডেটা দেখতে চান?", placeholder="যেমন: জনসংখ্যার বৃদ্ধি বা গতি বনাম সময়...", key="chart_input")
+        
+        if st.button("গ্রাফ ও চার্ট জেনারেট করুন 📈", key="btn_chart"):
+            if topic_chart.strip() != "":
+                with st.spinner("গ্রাফ ও ভিজ্যুয়াল তৈরি হচ্ছে... ⏳"):
+                    st.success(f"🎯 **{topic_chart}** এর ভিজ্যুয়াল রিপ্রেজেন্টেশন:")
+                    
+                    df = pd.DataFrame({
+                        'ধাপ বা সময় (Step/Time)': ['ধাপ ১', 'ধাপ ২', 'ধাপ ৩', 'ধাপ ৪', 'ধাপ ৫'],
+                        'প্রভাব বা মান (Impact Value)': [20, 45, 70, 90, 100]
+                    })
+                    
+                    fig = px.bar(df, x='ধাপ বা সময় (Step/Time)', y='প্রভাব বা মান (Impact Value)', 
+                                 title=f"{topic_chart} - বিশ্লেষণ চার্ট",
+                                 color='প্রভাব বা মান (Impact Value)',
+                                 color_continuous_scale='sunset')
+                    st.plotly_chart(fig, use_container_width=True)
+                    
+                    st.info("💡 ইন্টারঅ্যাক্টিভ চার্টের মাধ্যমে বিষয়টি দৃশ্যমান করা হলো।")
+            else:
+                st.warning("দয়া করে বিষয়ের নাম লিখুন!")
+
+    # ----------------- ট্যাব ৩: গভীর বিশ্লেষণ -----------------
+    with tab3:
+        st.subheader("🔍 যেকোনো বিষয়ের গভীর ও তাত্ত্বিক বিশ্লেষণ")
+        topic_analysis = st.text_area("কোন বিষয়টি গভীরভাবে বিশ্লেষণ করতে চান?", placeholder="যেমন: বাংলাদেশের অর্থনীতি বা কৃত্রিম বুদ্ধিমত্তার প্রভাব...", key="analysis_input")
+        
+        if st.button("বিশ্লেষণ শুরু করুন 🔍", key="btn_analysis"):
+            if topic_analysis.strip() != "":
+                with st.spinner("এআই গভীর বিশ্লেষণ তৈরি করছে... ⏳"):
+                    try:
+                        genai.configure(api_key=GEMINI_API_KEY)
+                        model = genai.GenerativeModel('gemini-3.8-flash')
+                        prompt = f"Provide a deep, comprehensive, and structured analytical breakdown of '{topic_analysis}' in fluent Bengali."
+                        response = model.generate_content(prompt)
+                        st.success("✅ গভীর বিশ্লেষণ:")
+                        st.markdown(response.text)
+                    except Exception as e:
+                        st.error(f"ত্রুটি দেখা দিয়েছে: {e}")
+            else:
+                st.warning("দয়া করে কিছু একটা লিখুন!")
+
+    # ----------------- ট্যাব ৪: সারসংক্ষেপ -----------------
+    with tab4:
+        st.subheader("📝 পাঠ্যবই বা বড় টপিকের মূল সারসংক্ষেপ (Summary)")
+        topic_summary = st.text_area("কোন বড় প্রবন্ধ বা বিষয়ের সারসংক্ষেপ চাচ্ছেন?", placeholder="এখানে বড় কোনো প্যারাগ্রাফ বা বিষয়ের নাম দিন...", key="summary_input")
+        
+        if st.button("সারসংক্ষেপ তৈরি করুন 📝", key="btn_summary"):
+            if topic_summary.strip() != "":
+                with st.spinner("সারসংক্ষেপ তৈরি হচ্ছে... ⏳"):
+                    try:
+                        genai.configure(api_key=GEMINI_API_KEY)
+                        model = genai.GenerativeModel('gemini-3.8-flash')
+                        prompt = f"Summarize the following topic or text into concise, bullet-point key takeaways in fluent Bengali: '{topic_summary}'"
+                        response = model.generate_content(prompt)
+                        st.success("✅ মূল সারসংক্ষেপ (Key Takeaways):")
+                        st.markdown(response.text)
+                    except Exception as e:
+                        st.error(f"ত্রুটি দেখা দিয়েছে: {e}")
+            else:
+                st.warning("দয়া করে কিছু একটা লিখুন!")
+
+    # ----------------- ট্যাব ৫: ম্যাথ ও শর্টকাট অ্যানিমেশন -----------------
+    with tab5:
+        st.subheader("⚡ ম্যাথ শর্টকাট ও স্টেপ-বাই-স্টেপ লজিক")
+        math_problem = st.text_input("কোন ম্যাথ বা শর্টকাট ট্রিক দেখতে চান?", placeholder="যেমন: ১১ দিয়ে গুণ করার শর্টকাট বা বীজগণিতের সূত্র...", key="math_input")
+        
+        if st.button("লজিক অ্যানিমেশন শুরু করুন 🎮", key="btn_math"):
+            if math_problem.strip() != "":
+                with st.spinner("ম্যাথ ম্যাজিক লজিক তৈরি হচ্ছে... ⏳"):
+                    try:
+                        genai.configure(api_key=GEMINI_API_KEY)
+                        model = genai.GenerativeModel('gemini-3.8-flash')
+                        prompt = f"Explain the math shortcut, tricks, and step-by-step logic for '{math_problem}' in a very simple and clear way in fluent Bengali."
+                        response = model.generate_content(prompt)
+                        
+                        st.success("🎯 পর্দার পেছনের ম্যাজিক লজিক ও শর্টকাট:")
+                        st.markdown(response.text)
+                        st.balloons()
+                    except Exception as e:
+                        st.error(f"ত্রুটি দেখা দিয়েছে: {e}")
+            else:
+                st.warning("দয়া করে কোনো ম্যাথ বা শর্টকাটের নাম লিখুন!")
 
 elif menu == "📞 যোগাযোগ":
     st.markdown("## 📞 যোগাযোগ করুন")
